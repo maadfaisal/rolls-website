@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sister's Special Rolls - Best Rolls in Town</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+    <a href="#home" class="logo-link">
+     <img src="logo.png" alt="F. Brothers Logo" class="logo-img">
+    </a>
+  <nav class="navbar">
+    <a href="index.html">Home</a> <a href="index.html#menu">Menu</a>
+    <a href="index.html#contact">Contact</a>
+    
+    <a href="cart.html" class="cart-icon" style="position: relative; margin-right: 15px;">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count" style="position: absolute; top: -8px; right: -10px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">0</span>
+    </a>
+
+    <a href="login.html" id="login-btn" class="btn-login">Login / Signup</a>
+
+    <div id="user-profile" class="user-profile" onclick="openAccountModal()" style="display: none;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User">
+        <span id="header-username">User</span>
+    </div>
+ </nav>
+
+    <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+</header>
+
+<div id="account-modal" class="modal">
+    <div class="modal-content account-box">
+        <span class="close-btn" onclick="closeAccountModal()">&times;</span>
+        <h2>My Account</h2>
+        
+        <div class="profile-details">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" class="big-avatar">
+            <h3 id="acc-name">User Name</h3>
+            <p><strong>Email/ID:</strong> <span id="acc-email">user@example.com</span></p>
+            <p><strong>Phone:</strong> <span id="acc-phone">9876543210</span></p>
+            
+            <div class="subscription-badge">
+                Plan: <span id="acc-plan">Normal</span> 🌟
+            </div>
+
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </div>
+</div>
+
+    <section id="home" class="hero">
+        <div class="hero-text">
+            <h1>Crispy, Spicy & <br> <span>Delicious Rolls</span></h1>
+            <p>Egg Roll, Paneer Roll, Kabab Roll aur bhi bahut kuch. Bilkul ghar jaisa swaad!</p>
+            <a href="#menu" class="btn-main">Order Now</a>
+        </div>
+        <div class="hero-img">
+            <img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=600&auto=format&fit=crop&q=60" alt="Delicious Roll">
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2 class="heading">Our <span>Menu</span></h2>
+        <div class="menu-container">
+            
+            <div class="box" onclick="openOrderPage('Egg Roll', 60, 'egg roll.png')">
+                <img src="egg roll.png" alt="Egg Roll">
+                <h3>Super Egg Roll</h3>
+                <p>Spicy chutney aur fresh veggies ke saath.</p>
+                <div class="price">₹60</div>
+                <button class="btn-order">Order Now</button>
+            </div>
+
+            <div class="box" onclick="openOrderPage('Paneer Chatpata Roll', 100, 'paneer.png')">
+                <img src="paneer.png" alt="Paneer Roll">
+                <h3>Paneer Chatpata</h3>
+                <p>Loaded with grilled paneer cubes.</p>
+                <div class="price">₹100</div>
+                <button class="btn-order">Order Now</button>
+            </div>
+
+            <div class="box" onclick="openOrderPage('Chicken Kabab Roll', 120, 'kabab roll.png')">
+                <img src="kabab roll.png" alt="Kabab Roll">
+                <h3>Juicy Kabab Roll</h3>
+                <p>Secret masalas with mayo toppings.</p>
+                <div class="price">₹120</div>
+                <button class="btn-order">Order Now</button>
+            </div>
+
+            <div class="box" onclick="openOrderPage('Custom Special Roll', 150, 'https://plus.unsplash.com/premium_photo-1663852297267-827c73e7529e?w=400')">
+                <img src="https://plus.unsplash.com/premium_photo-1663852297267-827c73e7529e?w=400" alt="Custom Roll">
+                <h3>Custom Special</h3>
+                <p>Apni pasand ki fillings choose karein.</p>
+                <div class="price">₹150</div>
+                <button class="btn-order">Customize</button>
+            </div>
+
+        </div>
+    </section>
+
+  <div id="order-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeOrderPage()">&times;</span>
+        <div class="modal-body">
+            <div class="modal-img">
+                <img id="modal-img" src="" alt="">
+            </div>
+            <div class="modal-info">
+                <h2 id="modal-title">Roll Name</h2>
+                <h3 class="price-tag">Price per roll: ₹<span id="modal-price">0</span></h3>
+                
+                <label for="quantity">Number of Orders:</label>
+                <div class="quantity-selector">
+                    <button onclick="changeQty(-1)">-</button>
+                    <input type="number" id="quantity" value="1" min="1" readonly>
+                    <button onclick="changeQty(1)">+</button>
+                </div>
+
+               
+                <div class="total-section">
+                    <h3>Total Price: ₹<span id="total-price">0</span></h3>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-cart" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn-buy" onclick="buyNow()">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <section id="contact">
+        <h2 class="heading">Contact <span>Us</span></h2>
+        <div class="contact-container">
+           <form onsubmit="submitContactForm(event)">
+             <input type="text" placeholder="Your Name" required>
+             <input type="email" placeholder="Email (Optional)">
+             <input type="number" placeholder="Mobile Number" required>
+             <textarea placeholder="Any specific instructions for order?"></textarea>
+             <button type="submit" class="btn-main">Send Message</button>
+           </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.instagram.com/faisal_maad07" target="_blank" class="insta"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://wa.me/916299572199" target="_blank" class="wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://t.me/@Fais_17" target="_blank" class="tg"><i class="fab fa-telegram"></i> Telegram</a>
+        </div>
+        <p>Made with ❤️ for Sister's Rolls | © 2024</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,619 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary: #ff7800; /* Vibrant Orange */
+    --secondary: #130f40; /* Dark Blue/Black */
+    --light: #f7f7f7;
+    --box-shadow: 0 .5rem 1.5rem rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    transition: all .2s linear;
+}
+
+body {
+    background-color: var(--light);
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #fff;
+    padding: 1rem 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: var(--box-shadow);
+}
+
+/* --- LOGO STYLING --- */
+.logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 60px; /* Logo ki height set ki hai */
+    width: auto;  /* Width apne aap adjust hogi */
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Hover karne par thoda zoom effect (Optional) */
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* Mobile ke liye thoda chhota size */
+@media (max-width: 768px) {
+    .logo-img {
+        height: 45px;
+    }
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+nav a {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    margin-left: 2rem;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+.btn-login {
+    background: var(--primary);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.btn-login:hover {
+    background: var(--secondary);
+    color: #fff !important; 
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem 7%;
+    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9));
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-text h1 {
+    font-size: 4rem;
+    color: var(--secondary);
+    line-height: 1.2;
+}
+
+.hero-text h1 span {
+    color: var(--primary);
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 1rem 0 2rem;
+}
+
+.btn-main {
+    background: var(--secondary);
+    color: #fff;
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 5rem;
+}
+
+.btn-main:hover {
+    background: var(--primary);
+}
+
+.hero-img {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-img img {
+    width: 80%;
+    border-radius: 20px;
+    animation: float 3s linear infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Menu Section */
+#menu {
+    padding: 2rem 7%;
+}
+
+.heading {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--secondary);
+    margin-bottom: 2rem;
+}
+
+.heading span {
+    color: var(--primary);
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.box {
+    background: #fff;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+}
+
+.box:hover {
+    transform: scale(1.03);
+}
+
+.box img {
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+
+.box h3 {
+    color: var(--secondary);
+    font-size: 1.5rem;
+}
+
+.box .price {
+    font-size: 1.5rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin: 0.5rem 0;
+}
+
+.btn-order {
+    background: none;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.btn-order:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    max-height: 90vh;  /* Screen ki height ka 90% hi lega */
+    overflow-y: auto;  /* Agar content bada ho to Scrollbar aa jaye */
+    
+    /* Baaki purana design same rahega */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+}
+
+/* 2. Image ki Height ko limit karo */
+.modal-img img {
+    width: 100%;
+    height: 200px;      /* 🔥 Photo ki height fix kar di (200px) */
+    object-fit: cover;  /* Photo kategi nahi, adjust ho jayegi */
+    border-radius: 10px;
+    display: block;     /* Gap hatane ke liye */
+}
+
+/* 3. Mobile ke liye adjustment */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;      /* Mobile pe thoda chauda dikhe */
+        margin: 10px auto;
+    }
+    .modal-img img {
+        height: 150px;   /* Mobile pe photo aur chhoti rakho */
+    }
+}
+.modal-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.quantity-selector button {
+    background: var(--secondary);
+    color: white;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.quantity-selector input {
+    width: 50px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.btn-cart { background: orange; color: white; }
+.btn-buy { background: green; color: white; }
+
+/* Contact & Footer */
+.contact-container form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-container input, textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+footer {
+    background: var(--secondary);
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0 10px;
+}
+.social-links .insta:hover { color: #E1306C; }
+.social-links .wa:hover { color: #25D366; }
+.social-links .tg:hover { color: #0088cc; }
+
+/* --- LOGIN PAGE STYLES --- */
+.auth-container {
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1000);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-home {
+    position: absolute;
+    top: 20px; left: 20px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    z-index: 10;
+    background: rgba(0,0,0,0.5);
+    padding: 10px 20px;
+    border-radius: 30px;
+}
+
+.form-box {
+    width: 380px;
+    height: 520px; /* Thoda height badhaya taaki signup fields fit hon */
+    position: relative;
+    margin: 6% auto;
+    background: #fff;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 0 20px 9px #ff61241f;
+}
+
+.button-box {
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #ff61241f;
+    border-radius: 30px;
+}
+
+.toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    font-weight: bold;
+    color: #333;
+}
+
+#btn {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(to right, #ff7800, #ff4b1f);
+    border-radius: 30px;
+    transition: .5s;
+}
+
+.input-group {
+    top: 150px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.submit-btn {
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    background: linear-gradient(to right, #ff7800, #ff4b1f);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.check-box {
+    margin: 30px 10px 30px 0;
+}
+
+#login { left: 50px; }
+#register { left: 450px; }
+/* --- USER PROFILE (HEADER) --- */
+/* --- NAVBAR ALIGNMENT --- */
+/* Ye naya add kiya hai taaki sab ek line me rahe */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+/* --- USER PROFILE (HEADER - CIRCULAR UPDATE) --- */
+.user-profile {
+    width: 50px;        /* Fixed width */
+    height: 50px;       /* Fixed height (Equal hone se circle banega) */
+    border-radius: 50%; /* Perfect Circle */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    padding: 0;         /* Padding hata di taaki photo full aaye */
+    overflow: hidden;   /* Photo circle se bahar na nikle */
+    
+    margin-left: 50px;  /* 🔥 Yahan se Contact aur Profile me doori aayegi */
+    
+    cursor: pointer;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border: 2px solid var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.user-profile:hover {
+    transform: scale(1.1); /* Hover karne par thoda bada hoga */
+}
+
+.user-profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Photo stretch nahi hogi, fit aayegi */
+    border-radius: 50%;
+    margin: 0;
+}
+
+/* Header me Naam chhupa diya (Sirf photo dikhegi) */
+.user-profile span {
+    display: none;
+}
+
+/* --- ACCOUNT MODAL STYLING (Same as before) --- */
+.account-box {
+    text-align: center;
+    max-width: 400px;
+}
+/* ... (Baaki account modal ka code same rehne dena) ... */
+
+/* --- HAMBURGER MENU FIX (RESPONSIVE UPDATE) --- */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+        font-size: 2rem;
+        color: var(--secondary);
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: .3s ease-in-out;
+    }
+
+    .navbar.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .navbar a {
+        margin: 1.5rem;
+        display: block;
+        font-size: 1.5rem;
+    }
+    
+    /* Mobile me profile ko adjust kiya */
+    .user-profile {
+        margin-left: 0; /* Mobile me doori ki zarurat nahi */
+        margin-top: 20px;
+    }
+}
+/* --- ACCOUNT MODAL STYLING --- */
+.account-box {
+    text-align: center;
+    max-width: 400px;
+}
+
+.big-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 4px solid var(--primary);
+}
+
+.subscription-badge {
+    margin: 20px 0;
+    padding: 10px;
+    background: #fff3cd;
+    color: #856404;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid #ffeeba;
+}
+
+.btn-logout {
+    background: #dc3545; /* Red Color */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.btn-logout:hover {
+    background: #c82333;
+}
+
+/* --- HAMBURGER MENU FIX (RESPONSIVE) --- */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+        font-size: 2rem;
+        color: var(--secondary);
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* Hidden by default */
+        transition: .3s ease-in-out;
+    }
+
+    .navbar.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Visible when active */
+    }
+
+    .navbar a {
+        margin: 1.5rem;
+        display: block;
+        font-size: 1.5rem;
+    }
+    
+    .user-profile {
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
