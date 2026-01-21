@@ -197,7 +197,7 @@ async function placeCartOrder() {
     let orderDetails = cart.map(item => `${item.qty} x ${item.name}`).join(", ");
 
     try {
-        const response = await fetch('/api/order', {
+        const response = await fetch('http://localhost:5000/api/order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -308,7 +308,7 @@ async function buyNow() {
 
     // 2. Database me Save Karo
     try {
-        const response = await fetch('/api/order', {  // <-- Agar Render pe ho to '/api/order', agar local to 'http://localhost:5000/api/order'
+        const response = await fetch('http://localhost:5000/api/order', {  // <-- Agar Render pe ho to '/api/order', agar local to 'http://localhost:5000/api/order'
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -374,7 +374,7 @@ async function handleSignup(event) {
     console.log("Data:", name, email, phone);
 
     try {
-        const response = await fetch('/api/signup', {
+        const response = await fetch('http://localhost:5000/api/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, phone, password })
@@ -404,7 +404,7 @@ async function handleLogin(event) {
     const pass = document.getElementById('login-pass').value;
 
     try {
-        const response = await fetch('/api/login', {
+        const response = await fetch('http://localhost:5000/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password: pass })
@@ -435,7 +435,7 @@ async function submitContactForm(event) {
 
     // Backend ko bhejo
     try {
-        const response = await fetch('/api/contact', {
+        const response = await fetch('http://localhost:5000/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, mobile, message })
@@ -482,3 +482,67 @@ function updateCartCount() {
 
 // Page load hote hi number check karo
 window.addEventListener('load', updateCartCount);
+
+// =========================================
+//  TYPEWRITER EFFECT LOGIC
+// =========================================
+
+const typingElement = document                    
+  .getElementById('typing-text');
+
+// Yahan wo words likho jo tum dikhana chahte ho
+const phrases = [
+    "Delicious Rolls",
+    "Custom Rolls",
+    "Order & Enjoy",
+    "Best In Town"
+];
+
+let phraseIndex = 0; // Abhi kaunsa word chal raha hai
+let charIndex = 0;   // Kaunsa letter type ho raha hai
+let isDeleting = false; // Kya hum delete kar rahe hain?
+let typingSpeed = 150; // Type karne ki speed
+
+function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
+
+    if (isDeleting) {
+        // Delete karne ka logic: Ek letter kam karo
+        typingElement.innerText = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 75; // Delete fast hona chahiye
+    } else {
+        // Type karne ka logic: Ek letter add karo
+        typingElement.innerText = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 150; // Type normal speed me
+    }
+
+    // Agar word pura type ho gaya
+    if (!isDeleting && charIndex === currentPhrase.length) {
+        // Thoda wait karo (2 second) fir delete karna shuru karo
+        typingSpeed = 2000; 
+        isDeleting = true;
+    } 
+    // Agar word pura delete ho gaya
+    else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        // Agle word par jao
+        phraseIndex++;
+        // Agar list khatam ho gayi to wapas pehle word par aa jao (Loop)
+        if (phraseIndex === phrases.length) {
+            phraseIndex = 0;
+        }
+        typingSpeed = 500; // Naya word shuru karne se pehle thoda pause
+    }
+
+    // Ye function baar-baar chalega
+    setTimeout(typeEffect, typingSpeed);
+}
+
+// Jab page load ho jaye tab effect shuru karo
+document.addEventListener('DOMContentLoaded', () => {
+    if (typingElement) {
+        typeEffect();
+    }
+});
