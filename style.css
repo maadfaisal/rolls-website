@@ -219,6 +219,27 @@ nav a:hover {
     color: #fff;
 }
 
+/* --- TYPEWRITER CURSOR EFFECT --- */
+#typing-text {
+    color: var                    
+  (--primary); /* Tumhara Orange color */
+    position: relative;
+}
+
+/* Ye text ke aage wala danda hai jo blink karega */
+#typing-text::after {
+    content: "|"; 
+    margin-left: 5px;
+    opacity: 1;
+    animation: blink 0.7s infinite; /* Blink animation */
+    color: var(--secondary); /* Dark Blue color */
+}
+
+/* Blink Animation Logic */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
 /* Modal Styling */
 .modal {
     display: none; /* Hidden by default */
