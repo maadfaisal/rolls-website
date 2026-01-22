@@ -197,7 +197,7 @@ async function placeCartOrder() {
     let orderDetails = cart.map(item => `${item.qty} x ${item.name}`).join(", ");
 
     try {
-        const response = await fetch('http://localhost:5000/api/order', {
+        const response = await fetch('/api/order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -308,7 +308,7 @@ async function buyNow() {
 
     // 2. Database me Save Karo
     try {
-        const response = await fetch('http://localhost:5000/api/order', {  // <-- Agar Render pe ho to '/api/order', agar local to 'http://localhost:5000/api/order'
+        const response = await fetch('/api/order', {  // <-- Agar Render pe ho to '/api/order', agar local to 'http://localhost:5000/api/order'
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -374,7 +374,7 @@ async function handleSignup(event) {
     console.log("Data:", name, email, phone);
 
     try {
-        const response = await fetch('http://localhost:5000/api/signup', {
+        const response = await fetch('/api/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, phone, password })
@@ -404,7 +404,7 @@ async function handleLogin(event) {
     const pass = document.getElementById('login-pass').value;
 
     try {
-        const response = await fetch('http://localhost:5000/api/login', {
+        const response = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password: pass })
@@ -435,7 +435,7 @@ async function submitContactForm(event) {
 
     // Backend ko bhejo
     try {
-        const response = await fetch('http://localhost:5000/api/contact', {
+        const response = await fetch('/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, mobile, message })
@@ -546,3 +546,4 @@ document.addEventListener('DOMContentLoaded', () => {
         typeEffect();
     }
 });
+
